@@ -7,6 +7,7 @@ interface Task {
   description: string;
   date: string;
   time: string;
+  isDone: boolean
 }
 
 interface TaskFormProps {
@@ -32,11 +33,13 @@ const TaskForm: React.FC < TaskFormProps > = ({
           name: taskName,
           description: taskDescription,
           date: taskDate,
-          time: taskTime
+          time: taskTime,
+          isDone: editTaskData ? editTaskData.isDone : false, // Tambahkan ini!
         });
         onClose();
       }
     };
+    
 
   return (
     <div className="task-form">

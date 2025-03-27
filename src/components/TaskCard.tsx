@@ -8,20 +8,23 @@ interface Task {
   description: string;
   date: string;
   time: string;
+  isDone: boolean; 
 }
 
 interface TaskCardProps {
   task: Task;
   onDelete: () => void;
   onEdit: () => void;
+  toggleStatus: () => void; 
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) => {
-  const [isDone, setIsDone] = useState(false);
+const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit, toggleStatus }) => {
+  const [isDone, setIsDone] = useState(task.isDone);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsDone(!isDone);
+    toggleStatus(); 
   };
 
   const handleDeleteClick = () => {
