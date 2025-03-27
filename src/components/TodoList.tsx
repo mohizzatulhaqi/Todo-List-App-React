@@ -42,8 +42,12 @@ const TodoList: React.FC = () => {
       } else {
         return "Good Evening! 🌙"
       }
-
     }
+    
+    const deleteTask = (indexToDelete: number) => {
+      setTasks(tasks.filter((_, index) => index !== indexToDelete));
+    };
+    
 
   return (
   <div className="container">
@@ -84,15 +88,12 @@ const TodoList: React.FC = () => {
       <div className="task-list-container">
         <div className="task-list">
           {tasks.map((task, index) => (
-          <TaskCard key={index} task={task} onDelete={()=> console.log("Hapus task:", task.name)}
+          <TaskCard key={index} task={task} onDelete={()=> deleteTask(index)}
             onEdit={() => console.log("Edit task:", task.name)}
             />
             ))}
         </div>
       </div>
-
-
-
     </div>
   </div>
   );

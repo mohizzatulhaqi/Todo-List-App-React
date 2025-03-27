@@ -92,7 +92,7 @@ const TaskForm: React.FC < TaskFormProps > = ({
         </label>
 
         <button type="submit" className="submit-button">
-          Tambah
+          Add
         </button>
       </form>
     </div>
