@@ -13,16 +13,49 @@ interface Task {
 
 const TodoList: React.FC = () => {
     const [showForm, setShowForm] = useState(false);
-    const [tasks, setTasks] = useState < Task[] > ([]);
+    const [tasks, setTasks] = useState < Task[] > (() => {
+      const savedTasks = localStorage.getItem("tasks");
+      return savedTasks ? JSON.parse(savedTasks) : [];
+    });
+
+    const [editTask, setEditTask] = useState < Task | null > (null);
+    const [editIndex, setEditIndex] = useState < number | null > (null);
 
     const toggleForm = () => {
       setShowForm(!showForm);
+      setEditTask(null);
+      setEditIndex(null);
     };
 
     const addTask = (task: Task) => {
-      setTasks([...tasks, task]);
-      console.log("Task added:", task);
+      if (editIndex !== null) {
+        // Edit task yang sudah ada
+        const updatedTasks = tasks.map((t, index) =>
+          index === editIndex ? task : t
+        );
+        setTasks(updatedTasks);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      } else {
+        // Tambah task baru
+        const updatedTasks = [...tasks, task];
+        setTasks(updatedTasks);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      }
       setShowForm(false);
+      setEditTask(null);
+      setEditIndex(null);
+    };
+
+    const deleteTask = (indexToDelete: number) => {
+      const updatedTasks = tasks.filter((_, index) => index !== indexToDelete);
+      setTasks(updatedTasks);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    };
+
+    const handleEditTask = (task: Task, index: number) => {
+      setEditTask(task);
+      setEditIndex(index);
+      setShowForm(true);
     };
 
     const today = new Date().toLocaleDateString("en-GB", {
@@ -34,20 +67,10 @@ const TodoList: React.FC = () => {
 
     const greeting = () => {
       const hour = new Date().getHours();
-
-      if (hour >= 0 && hour < 12) {
-        return "Good Morning! ☀️"
-      } else if (hour > 12 && hour < 18) {
-        return "Good Afternoon! 🌤️"
-      } else {
-        return "Good Evening! 🌙"
-      }
-    }
-    
-    const deleteTask = (indexToDelete: number) => {
-      setTasks(tasks.filter((_, index) => index !== indexToDelete));
+      if (hour >= 0 && hour <= 12) return "Good Morning! ☀️";
+      if (hour > 12 && hour < 18) return "Good Afternoon! 🌤️";
+      return "Good Evening! 🌙";
     };
-    
 
   return (
   <div className="container">
@@ -83,13 +106,13 @@ const TodoList: React.FC = () => {
       <br />
 
       {showForm &&
-      <TaskForm addTask={addTask} onClose={toggleForm} />}
+      <TaskForm addTask={addTask} onClose={toggleForm} editTaskData={editTask} />}
 
       <div className="task-list-container">
         <div className="task-list">
           {tasks.map((task, index) => (
           <TaskCard key={index} task={task} onDelete={()=> deleteTask(index)}
-            onEdit={() => console.log("Edit task:", task.name)}
+            onEdit={() => handleEditTask(task, index)}
             />
             ))}
         </div>

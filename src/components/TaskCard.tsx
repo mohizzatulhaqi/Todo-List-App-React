@@ -48,8 +48,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) => {
       <p className={`task-description ${isDone ? "strikethrough" : ""}`}>{task.description}</p>
 
       <div className="task-footer">
-        <p className="task-date">{task.date}</p>
-        <p className="task-time">{task.time}</p>
+        <p className={`task-date ${isDone ? "strikethrough" : ""}`}>{task.date}</p>
+        <p className={`task-time ${isDone ? "strikethrough" : ""}`}>{task.time}</p>
         <input 
           type="checkbox" 
           className="task-checkbox" 
