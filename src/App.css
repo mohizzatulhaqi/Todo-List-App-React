@@ -4,19 +4,18 @@ html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: Arial, sans-serif;
 }
 
 .todo-list {
   text-align: left;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: #F7F7F7;
   padding: 40px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
 }
 
-/* Judul */
 .title {
   font-size: 60px;
   font-weight: bold;
@@ -26,7 +25,6 @@ html {
   color: black;
 }
 
-/* Greeting */
 .greeting-section {
   margin-top: 100px;
   margin-left: 10px;
@@ -36,7 +34,7 @@ html {
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 2px;
-  color: black
+  color: black;
 }
 
 .date {
@@ -46,13 +44,11 @@ html {
   font-weight: bold;
 }
 
-/* Filter */
 .filter-section {
   margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   background: #ffffff;
   padding: 10px;
   border-radius: 20px;
@@ -114,7 +110,8 @@ html {
   gap: 12px;
 }
 
-.filter-task {
+.filter-task,
+.add-task {
   color: #4F4F4F;
   font-weight: bolder;
   background: white;
@@ -123,20 +120,11 @@ html {
   font-size: 22px;
   display: flex;
   align-items: center;
-  margin-left: -35px;
   gap: 8px;
 }
 
 .add-task {
-  color: #4F4F4F;
-  font-weight: bolder;
-  background: white;
   border: 3px solid #DEE0E0;
-  padding: 14px 28px;
-  border-radius: 25px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
   margin-right: 30px;
@@ -146,14 +134,6 @@ html {
   background: #eee;
 }
 
-.no-task {
-  font-size: 20px;
-  color: #4F4F4F;
-  text-align: center;
-  margin-top: 200px;
-}
-
-/* Task Form */
 .task-form {
   z-index: 1000;
   background: white;
@@ -162,13 +142,11 @@ html {
   height: 520px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 
 .task-form-header {
   display: flex;
@@ -199,7 +177,6 @@ label {
   margin-top: 30px;
   font-weight: bold;
   color: #4F4F4F;
-
 }
 
 .required {
@@ -263,22 +240,6 @@ textarea {
   background: #ce93d8;
 }
 
-/* Task Card*/
-
-.no-task-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 200px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #4F4F4F;
-  margin-top: 150px;
-  margin-right: -1350px;
-  opacity: 60%; 
-} 
-
 .task-card {
   width: 412px;
   height: 439px;
@@ -287,8 +248,6 @@ textarea {
   padding: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  font-family: Arial, sans-serif;
-  margin-left: 0px;
 }
 
 .task-status {
@@ -303,11 +262,15 @@ textarea {
   margin-left: 10px;
 }
 
+.task-status.done {
+  background: #C3FFC6;
+  color: #388E3C;
+}
+
 .task-actions {
   position: absolute;
   top: 15px;
   right: 15px;
-
   display: flex;
   align-items: center;
   gap: 12px;
@@ -323,7 +286,6 @@ textarea {
 .task-icon:hover {
   transform: scale(1.2);
 }
-
 
 .task-title {
   font-size: 30px;
@@ -346,7 +308,6 @@ textarea {
   margin-top: 210px;
   border-top: 1px solid #B5B7BB;
   padding-top: 10px;
-
 }
 
 .task-date {
@@ -374,10 +335,9 @@ textarea {
 }
 
 .task-list-container {
-  max-height: calc(100vh - px);
+  max-height: calc(100vh - 400px);
   overflow-y: auto;
   padding-right: 10px;
-  background-color: #F7F7F7;
 }
 
 .task-list {
@@ -387,17 +347,11 @@ textarea {
   padding: 10px;
 }
 
-.task-status.done {
-  background: #C3FFC6;
-  color: #388E3C;
-}
-
 .strikethrough {
   text-decoration: line-through;
   color: gray;
 }
 
-/* Modal Confirmation Delete */
 .delete-modal {
   z-index: 1001;
   position: fixed;
@@ -424,9 +378,9 @@ textarea {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.trash-icon {
-  width: 50px;
-  margin: 5px;
+.trash-ilust {
+  width: 100px;
+  margin: 10px auto;
 }
 
 .modal-buttons {
@@ -458,9 +412,176 @@ textarea {
 }
 
 .delete-btn:hover {
-  background: #FCC7C7;
+  background: #d32f2f;
 }
 
 .cancel-btn:hover {
-  background: #808087;
+  background: #a0a0a0;
+}
+
+
+@media (max-width: 1200px) {
+  .task-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .todo-list {
+    padding: 30px;
+  }
+  
+  .title {
+    font-size: 50px;
+  }
+  
+  .greeting {
+    font-size: 35px;
+  }
+  
+  .filter {
+    font-size: 18px;
+    padding: 5px 12px;
+  }
+  
+  .filter-task,
+  .add-task {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  
+  .task-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .task-form {
+    width: 80%;
+    height: auto;
+  }
+  
+  .task-form-header {
+    width: calc(100% + 40px);
+  }
+  
+  .deadline-inputs {
+    width: 100%;
+  }
+  
+  .submit-button {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-list {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 40px;
+  }
+  
+  .greeting {
+    font-size: 30px;
+  }
+  
+  .date {
+    font-size: 16px;
+  }
+  
+  .filter-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .filter-buttons {
+    gap: 10px;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  
+  .filter {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  
+  .action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .task-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .task-title {
+    font-size: 24px;
+  }
+  
+  .task-description {
+    font-size: 18px;
+  }
+  
+  .task-footer {
+    margin-top: 50px;
+    position: relative;
+  }
+  
+  .task-checkbox {
+    transform: scale(1.5);
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .modal-content {
+    width: 90%;
+    height: auto;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+  }
+  
+  .cancel-btn,
+  .delete-btn {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+  }
+  
+  .greeting {
+    font-size: 24px;
+  }
+  
+  .filter-task,
+  .add-task {
+    font-size: 16px;
+    padding: 8px 15px;
+  }
+  
+  input,
+  textarea {
+    width: 85%;
+    font-size: 16px;
+  }
+  
+  .deadline-inputs {
+    flex-direction: column;
+  }
+  
+  .submit-button {
+    width: 80%;
+    font-size: 18px;
+  }
 }
