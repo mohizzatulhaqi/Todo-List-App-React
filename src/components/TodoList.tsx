@@ -137,22 +137,30 @@ const TodoList: React.FC = () => {
         {showForm &&
         <TaskForm addTask={addTask} onClose={toggleForm} editTaskData={editTask} />}
 
-        <div className="task-list-container">
-          <div className="task-list">
-            {filteredTasks.map((task) => {
-            const originalIndex = tasks.findIndex(
-            (t) => JSON.stringify(t) === JSON.stringify(task)
-            );
-
-            return (
-            <TaskCard key={originalIndex} task={task} onDelete={()=> deleteTask(originalIndex)}
-              onEdit={() => handleEditTask(task, originalIndex)}
-              toggleStatus={() => toggleTaskStatus(originalIndex)}
-              />
+      <div className="task-list-container">
+        <div className="task-list">
+          {filteredTasks.length === 0 ? (
+            <p className="no-task-message">No Task Available</p>
+              ) : (
+                   filteredTasks.map((task) => {
+                   const originalIndex = tasks.findIndex(
+                  (t) => JSON.stringify(t) === JSON.stringify(task)
               );
-              })}
-          </div>
-        </div>
+
+        return (
+          <TaskCard
+            key={originalIndex}
+            task={task}
+            onDelete={() => deleteTask(originalIndex)}
+            onEdit={() => handleEditTask(task, originalIndex)}
+            toggleStatus={() => toggleTaskStatus(originalIndex)}
+          />
+        );
+      })
+    )}
+  </div>
+</div>
+
       </div>
     </div>
     );
