@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CalendarIcon from "/Users/kiki/to-do-list-app-group4/src/assets/calendaricon.png";
-import ClockIcon from "/Users/kiki/to-do-list-app-group4/src/assets/clockicon.png";
+import CalendarIcon from "../assets/calendaricon.png";
+import ClockIcon from "../assets/clockicon.png";
 
 interface Task {
   name: string;
@@ -24,7 +24,12 @@ const TaskForm: React.FC < TaskFormProps > = ({
     const [taskName, setTaskName] = useState(editTaskData ? editTaskData.name : "");
     const [taskDescription, setTaskDescription] = useState(editTaskData ? editTaskData.description : "");
     const [taskDate, setTaskDate] = useState(editTaskData ? editTaskData.date : "");
-    const [taskTime, setTaskTime] = useState(editTaskData ? editTaskData.time : "");
+    const [taskTime, setTaskTime] = useState(
+      editTaskData ? editTaskData.time : new Date().toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit"
+      })
+    );
 
     const handleSubmit = (event: React.FormEvent) => {
       event.preventDefault();
@@ -34,13 +39,12 @@ const TaskForm: React.FC < TaskFormProps > = ({
           description: taskDescription,
           date: taskDate,
           time: taskTime,
-          isDone: editTaskData ? editTaskData.isDone : false, // Tambahkan ini!
+          isDone: editTaskData ? editTaskData.isDone : false,
         });
         onClose();
       }
     };
     
-
   return (
     <div className="task-form">
       <div className="task-form-header">

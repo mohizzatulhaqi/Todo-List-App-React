@@ -61,7 +61,7 @@ html {
 
 .filter-buttons {
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
 
 .filter {
@@ -114,7 +114,19 @@ html {
   gap: 12px;
 }
 
-.filter-task,
+.filter-task {
+  color: #4F4F4F;
+  font-weight: bolder;
+  background: white;
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  margin-left: -35px;
+  gap: 8px;
+}
+
 .add-task {
   color: #4F4F4F;
   font-weight: bolder;
@@ -125,12 +137,11 @@ html {
   font-size: 20px;
   display: flex;
   align-items: center;
-  gap: 6px;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
+  margin-right: 30px;
 }
 
-.filter-task:hover,
 .add-task:hover {
   background: #eee;
 }
@@ -210,7 +221,6 @@ label {
   color: gray;
 }
 
-
 input,
 textarea {
   width: 88%;
@@ -218,13 +228,13 @@ textarea {
   margin-top: 5px;
   border: 3px solid #ccc;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 18px;
   background-color: #ffffff;
   color: #4F4F4F;
 }
 
 textarea {
-  height: 60px;
+  height: 80px;
   resize: none;
 }
 
@@ -303,9 +313,9 @@ textarea {
 
 .task-title {
   font-size: 30px;
-  font-weight: bold;
   margin-left: 10px;
   color: black;
+  font-weight: bolder;
 }
 
 .task-description {
@@ -313,6 +323,7 @@ textarea {
   margin-left: 10px;
   margin-top: -20px;
   color: #B5B7BB;
+  font-weight: bold;
 }
 
 .task-footer {
@@ -327,15 +338,13 @@ textarea {
 .task-date {
   font-size: 18px;
   color: #848484;
-  font-weight: bold;
   margin-top: 5px;
   margin-left: 10px;
 }
 
 .task-time {
-  font-size: 18px;
+  font-size: 16px;
   color: #848484;
-  font-weight: bold;
   margin-top: -20px;
   margin-left: 10px;
 }
@@ -412,7 +421,8 @@ textarea {
   margin-top: 40px;
 }
 
-.cancel-btn, .delete-btn {
+.cancel-btn,
+.delete-btn {
   padding: 8px 35px;
   border: none;
   cursor: pointer;
@@ -433,10 +443,10 @@ textarea {
   margin-right: 90px;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
   background: #FCC7C7;
 }
 
-.cancel-btn:hover{
+.cancel-btn:hover {
   background: #808087;
 }
