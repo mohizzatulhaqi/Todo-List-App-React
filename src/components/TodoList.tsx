@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskCard from "./TaskCard";
-import FilterButton from "/Users/kiki/to-do-list-app-group4/src/assets/filterbutton.png";
-import AddButton from "/Users/kiki/to-do-list-app-group4/src/assets/addbutton.png";
+import FilterButton from "../assets/filterbutton.png";
+import AddButton from "../assets/addbutton.png";
 
 interface Task {
   name: string;
