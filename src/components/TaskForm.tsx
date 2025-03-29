@@ -57,12 +57,14 @@ const TaskForm: React.FC < TaskFormProps > = ({
           <input type="text" placeholder="Enter task name..." value={taskName} onChange={(e)=>
           setTaskName(e.target.value)}
           required
+          maxLength={50}
           />
         </label>
 
         <label>
           Task Description
           <textarea placeholder="Enter task description..." value={taskDescription} onChange={(e)=> setTaskDescription(e.target.value)}
+          maxLength={100}
           />
         </label>
 
